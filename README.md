@@ -1,6 +1,6 @@
-The sentiment analysis Imdb movies.
+# The sentiment analysis Imdb movies with DVC
 
-The projet use the DVC tool build on git (https://dvc.org/doc/install).
+This repository has almost the same content  as the reprository Sentiment_Analysis. It uses DVC tool build on git (https://dvc.org/doc/install).
 
 Also, the version 3.7 of python has been used.
 
