@@ -12,6 +12,8 @@ import joblib
 
 import os
 
+import time
+
 def train():	
 	splited_dir = sys.argv[1]
 	embedding_dir = sys.argv[2]
@@ -46,7 +48,7 @@ def train():
 	with open(os.path.join(model_output), 'wb') as f:
             pickle.dump(clf_svm, f)
 
-    # Accuracy
+        # Accuracy
 	train_predict_lr = clf_svm.predict(trainset_embedding)
 	
 	accuracy_score_train_lr = accuracy_score(train_predict_lr, trainset_df['polarity'])
