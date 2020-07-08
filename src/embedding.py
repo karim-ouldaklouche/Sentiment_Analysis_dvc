@@ -10,7 +10,7 @@ import spacy
 
 import time
 
-def get_embedding(dataset, nlp, type_dataset, print_comment=False):
+def get_embedding(dataset, type_dataset, print_comment=False):
         """
         Parameters : 
         dataset : DataFrame
@@ -18,6 +18,8 @@ def get_embedding(dataset, nlp, type_dataset, print_comment=False):
         Returns
         embedding : List 
         """
+        nlp=spacy.load("en_core_web_sm")
+        
         start = time.perf_counter()
         print(f'Start embedding for {type_dataset}set')
         embedding = []
@@ -44,19 +46,18 @@ def create_embedding():
     trainset_df = pd.read_csv(trainset)
     testset_df = pd.read_csv(testset)
 
-    os.mkdir(os.path.join(output_dir))
+    if not os.path.exists(output_dir):
+        os.mkdir(os.path.join(output_dir))
 
     """
     Embedding of the text with the small model with spacy
     """
-    nlp=spacy.load("en_core_web_sm")
-
-    trainset_embedding = get_embedding(trainset_df, nlp, type_dataset='train')
+    trainset_embedding = get_embedding(trainset_df, type_dataset='train')
 
     with open(trainset_out, 'wb') as f:
             pickle.dump(trainset_embedding, f)
 
-    testset_embedding = get_embedding(testset_df, nlp, type_dataset='test')
+    testset_embedding = get_embedding(testset_df, type_dataset='test')
 
     with open(testset_out, 'wb') as f:
             pickle.dump(testset_embedding, f)
